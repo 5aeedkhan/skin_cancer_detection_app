@@ -6,6 +6,7 @@ import 'package:flutter_application_1/skin_test/3-display_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 
 class Info extends StatefulWidget {
   const Info({Key? key}) : super(key: key);
@@ -41,9 +42,26 @@ class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // title: Text('augustus'),
-        leading: IconButton(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: AppBar(
+          backgroundColor: Color.fromARGB(255, 16, 170, 226),
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  Color.fromARGB(255, 16, 170, 226),
+                  Color.fromARGB(255, 87, 179, 212),
+                ],
+              ),
+            ),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_outlined, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pop();
               Navigator.push(
@@ -51,10 +69,19 @@ class _InfoState extends State<Info> {
                 MaterialPageRoute(builder: (context) => Test_Home_page()),
               );
             },
-            icon: Icon(Icons.arrow_back_outlined)),
-
-        actions: [
-          IconButton(
+          ),
+          title: Text(
+            'Information',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.home_sharp, color: Colors.white),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.push(
@@ -62,29 +89,8 @@ class _InfoState extends State<Info> {
                   MaterialPageRoute(builder: (context) => Home()),
                 );
               },
-              icon: Icon(Icons.home_sharp)),
-        ],
-        flexibleSpace: Expanded(
-          child: Container(
-            padding: EdgeInsets.only(top: 35),
-            child: Text(
-              'information',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
             ),
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color.fromARGB(255, 16, 170, 226),
-                    Color.fromARGB(255, 87, 179, 212),
-                  ]),
-            ),
-          ),
+          ],
         ),
       ),
       body: Container(

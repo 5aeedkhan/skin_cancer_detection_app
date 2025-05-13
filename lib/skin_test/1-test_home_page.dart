@@ -39,9 +39,25 @@ class _Test_Home_pageState extends State<Test_Home_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // title: Text('augustus'),
-        leading: IconButton(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  Color.fromARGB(255, 16, 170, 226),
+                  Color.fromARGB(255, 87, 179, 212),
+                ],
+              ),
+            ),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_outlined, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pop();
               Navigator.push(
@@ -49,10 +65,19 @@ class _Test_Home_pageState extends State<Test_Home_page> {
                 MaterialPageRoute(builder: (context) => Home()),
               );
             },
-            icon: Icon(Icons.arrow_back_outlined)),
-
-        actions: [
-          IconButton(
+          ),
+          title: Text(
+            'Skin cancer test',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.info_sharp, color: Colors.white),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.push(
@@ -60,33 +85,8 @@ class _Test_Home_pageState extends State<Test_Home_page> {
                   MaterialPageRoute(builder: (context) => Info()),
                 );
               },
-              icon: Icon(
-                Icons.info_sharp,
-                color: Colors.white,
-              )),
-        ],
-        flexibleSpace: Expanded(
-          child: Container(
-            padding: EdgeInsets.only(top: 35),
-            child: Text(
-              'Skin cancer test',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
             ),
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color.fromARGB(255, 16, 170, 226),
-                    Color.fromARGB(255, 87, 179, 212),
-                  ]),
-              // colors: <Color>[Colors.black, Color.fromARGB(255, 0, 0, 0) ]),
-            ),
-          ),
+          ],
         ),
       ),
       body: SafeArea(

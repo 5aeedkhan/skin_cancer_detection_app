@@ -196,47 +196,51 @@ class _Load_imageState extends State<Load_image> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          // title: Text('augustus'),
+          backgroundColor: Color.fromARGB(255, 16, 170, 226),
+          elevation: 0,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  Color.fromARGB(255, 16, 170, 226),
+                  Color.fromARGB(255, 87, 179, 212),
+                ],
+              ),
+            ),
+          ),
           leading: IconButton(
+            icon: Icon(Icons.arrow_back_outlined, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Test_Home_page()),
+              );
+            },
+          ),
+          title: Text(
+            'Image selection',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.home_sharp, color: Colors.white),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Test_Home_page()),
+                  MaterialPageRoute(builder: (context) => Home()),
                 );
               },
-              icon: Icon(Icons.arrow_back_outlined)),
-
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  );
-                },
-                icon: Icon(Icons.home_sharp)),
-          ],
-          flexibleSpace: Expanded(
-            child: Container(
-              padding: EdgeInsets.only(top: 35),
-              child: Text(
-                'Image selection',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: <Color>[Colors.black, Colors.blue]),
-              ),
             ),
-          ),
+          ],
         ),
         body: temp == 0
             ? Container(
