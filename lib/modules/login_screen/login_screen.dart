@@ -16,22 +16,18 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
-   var user;
-
-   var pass;  
+  var user;
+  var pass;  
+  bool _obscureText = true;
 
   getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-   
-setState(() {
-        user = prefs.getString('email');
+    setState(() {
+      user = prefs.getString('email');
       pass = prefs.getString('password');
-});
-
-print(user);
-
-
-     }
+    });
+    print(user);
+  }
 
   savePref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();             
@@ -43,10 +39,6 @@ print(user);
     print('save login pref done successfllly');
     print(user);
   } 
-
-
- 
- 
 
   TextEditingController  emailController = TextEditingController(text:'');
   TextEditingController  passwordController = TextEditingController(text:'');
@@ -83,141 +75,139 @@ Future<void> parameter_ () async {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return BlocProvider(create: (BuildContext context) => LoginCubit(),
-    child:BlocConsumer<LoginCubit , LoginState>(
-        builder:(context , state){
+    return BlocProvider(
+      create: (BuildContext context) => LoginCubit(),
+      child: BlocConsumer<LoginCubit, LoginState>(
+        builder: (context, state) {
           return Scaffold(
-              body: Container(
-                height: height,
-                    decoration : BoxDecoration(
-                     gradient: LinearGradient(
-                       colors: [Color.fromARGB(146, 235, 249, 255), Color.fromARGB(255, 227, 245, 255)],
-
-                       begin: Alignment.centerLeft,
-                       end: Alignment.centerRight,
-                     ),
+            body: Container(
+              height: height,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color.fromARGB(146, 235, 249, 255), Color.fromARGB(255, 227, 245, 255)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
                 ),
-                
-                child: Stack(
-                  children:[
-           
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SingleChildScrollView(
-                        child: Form(
-                          key: formKey,
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             SizedBox(height: height * .1),
-                            // SizedBox(height: 50),
-
-                        Container(
-                          margin:EdgeInsets.all(5),
-                          height: 250,
-                          width: 300,
-                          child: Image.asset('images/logo2.png'),
-                          ),
-                           
-                           Container(
-                                child: TextFormField(
-                                  // controller:TextEditingController(text: '123@gmail.com'),
-                                  controller: emailController,
-                                  // controller: emailController ,
-                                  decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.person),
-                                    hintText: 'Enter Username',
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide(width: 1))
-                                       ),),
-                                    ),
-
-
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              height: 250,
+                              width: 300,
+                              child: Image.asset('images/logo2.png'),
+                            ),
+                            Container(
+                              child: TextFormField(
+                                controller: emailController,
+                                decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.person),
+                                  hintText: 'Enter Username',
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(width: 1)
+                                  )
+                                ),
+                              ),
+                            ),
                             SizedBox(height: 20),
-
                             Container(
                               child: TextFormField(
                                 controller: passwordController,
-                                obscureText: true,
+                                obscureText: _obscureText,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.lock),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureText = !_obscureText;
+                                      });
+                                    },
+                                  ),
                                   hintText: 'Enter Password',
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(width: 1)
-                                    )),
-                                    ),),
-
+                                  )
+                                ),
+                              ),
+                            ),
                             SizedBox(height: 20),
-
-
-              Container(
-                alignment: Alignment.center,
-             height: 50.0,
-             width: 350,
-             margin: EdgeInsets.all(10),
-             child: ElevatedButton(
-               onPressed: () async {
-                          if (formKey.currentState!.validate())
+                            Container(
+                              alignment: Alignment.center,
+                              height: 50.0,
+                              width: 350,
+                              margin: EdgeInsets.all(10),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate())
                                     LoginCubit.get(context).userLogin(
                                       email: emailController.text,
                                       password: passwordController.text,
-                                      );
+                                    );
 
-                          if (formKey.currentState!.validate()){
-                            setState(() {
-                                        user = emailController.text;
-                                        pass = passwordController.text;
-                                      });
+                                  if (formKey.currentState!.validate()){
+                                    setState(() {
+                                      user = emailController.text;
+                                      pass = passwordController.text;
+                                    });
 
-                                      await savePref();
-                          }
-                                      
-               
-               },
-               style: ElevatedButton.styleFrom(
-                      primary:Colors.blue,
-                      fixedSize: Size(350, 100),
-                        shape: RoundedRectangleBorder(
-                   borderRadius: BorderRadius.circular(20.0)),
-               padding: EdgeInsets.all(0.0),),
-               child: Ink(
-                 decoration: BoxDecoration(
-                     gradient: LinearGradient(
-                       colors: [Color.fromARGB(255, 66, 120, 212), Color.fromARGB(255, 79, 151, 213)],
-                       begin: Alignment.centerLeft,
-                       end: Alignment.centerRight,
-                     ),
-                     borderRadius: BorderRadius.circular(30.0)),
-                 child: Container(
-                   constraints:
-                       BoxConstraints(maxWidth: 350.0, minHeight: 50.0),
-                   alignment: Alignment.center,
-                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                     "Login",
-                     textAlign: TextAlign.center,
-                     style: TextStyle(color: Colors.white, fontSize: 25),
-                   ),
-                    ],
-                   )
-                 ),
-               ),
-             ),
-           ),
-             
-              createAccountLabel(context),
+                                    await savePref();
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary:Colors.blue,
+                                  fixedSize: Size(350, 100),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                  padding: EdgeInsets.all(0.0),),
+                                child: Ink(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [Color.fromARGB(255, 66, 120, 212), Color.fromARGB(255, 79, 151, 213)],
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(30.0)),
+                                  child: Container(
+                                    constraints:
+                                        BoxConstraints(maxWidth: 350.0, minHeight: 50.0),
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                     mainAxisAlignment: MainAxisAlignment.center,
+                                     children: [
+                                       Text(
+                                      "Login",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.white, fontSize: 25),
+                                    ),
+                                     ],
+                                    )
+                                  ),
+                                ),
+                              ),
+                            ),
+                            createAccountLabel(context),
                           ],
                         ),
                       ),
-                      ),
                     ),
-                    // Positioned(top: 40, left: 0, child: backButton(context)),
-                  ],
-                ),
-              ));
+                  ),
+                ],
+              ),
+            ));
         },
         listener: (context,state){
           if(state is successLoginState)
@@ -226,7 +216,7 @@ Future<void> parameter_ () async {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
             }
         },
-  ),
+      ),
     );
   }
 }
