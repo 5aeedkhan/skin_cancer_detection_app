@@ -7,6 +7,7 @@ import 'package:flutter_application_1/diseases/cancer.dart';
 import 'package:flutter_application_1/diseases/dermatofibroma.dart';
 import 'package:flutter_application_1/diseases/melanocytic_nevus.dart';
 import 'package:flutter_application_1/diseases/melanoma.dart';
+import 'package:flutter_application_1/diseases/scc.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/skin_test/1-test_home_page.dart';
 import 'package:flutter_application_1/skin_test/2-load_image.dart';
@@ -872,7 +873,7 @@ class _Display_imageState extends State<Display_image> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Cancer()),
+                                        builder: (context) => SCC()),
                                   );
                                 }
                               },
@@ -887,7 +888,9 @@ class _Display_imageState extends State<Display_image> {
                                     '$final_result',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                        fontSize: 25, color: Colors.black),
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: Text(
                                     infotxt,

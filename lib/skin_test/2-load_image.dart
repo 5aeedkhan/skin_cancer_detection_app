@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter_application_1/advanced_test/1-affected_area.dart';
+import 'package:flutter_application_1/diseases/scc.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/skin_test/1-test_home_page.dart';
 import 'package:flutter_application_1/skin_test/3-display_image.dart';
@@ -44,6 +45,12 @@ class _Load_imageState extends State<Load_image> {
   var email;
   var phone;
   var password;
+
+  List dangerous_lessions = [
+    'Melanoma',
+    'Basal Cell Carcinoma',
+    'Squamous Cell Carcinoma'
+  ];
 
   Future<void> getText(String path) async {
     final _loadedData = await rootBundle.loadString(path);
@@ -154,10 +161,18 @@ class _Load_imageState extends State<Load_image> {
       _loading = false;
       _modelPredicting = false;
       try {
-        augustus_output = '${_output[0]['label']}';
-        // augustus_confidence = '${(_output[0]['confidence']*100).toStringAsFixed(2)}';
-        augustus_confidence = '${(_output[0]['confidence'] * 100).round()}';
-        augustus_error = '';
+        String label = '${_output[0]['label']}';
+        if (label != 'Melanoma' &&
+            label != 'Basal Cell Carcinoma' &&
+            label != 'Squamous Cell Carcinoma') {
+          augustus_output = 'Unknown';
+          augustus_confidence = '';
+          augustus_error = 'Not Supported.';
+        } else {
+          augustus_output = label;
+          augustus_confidence = '${(_output[0]['confidence'] * 100).round()}';
+          augustus_error = '';
+        }
         loaded_image = 0;
         temp = 1;
       } catch (e) {

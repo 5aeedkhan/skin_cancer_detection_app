@@ -13,6 +13,7 @@ import 'package:flutter_application_1/skin_test/3-display_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_application_1/diseases/scc.dart';
 
 class Diseases extends StatefulWidget {
   const Diseases({Key? key}) : super(key: key);
@@ -292,6 +293,48 @@ class _DiseasesState extends State<Diseases> {
                               color: Color.fromARGB(255, 1, 70, 126)),
                           title: Text(
                             'Basal Cell Carcinoma',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Color.fromARGB(255, 1, 70, 126)),
+                          ),
+                          subtitle: Text(
+                            'Malignant skin lesion',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Color.fromARGB(255, 1, 70, 126)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                  child: Card(
+                    color: Colors.white,
+                    shape: Border.all(color: Colors.black),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SCC()),
+                        );
+                      },
+                      splashColor: Colors.amber,
+                      child: Ink(
+                        child: ListTile(
+                          minLeadingWidth: 0,
+                          horizontalTitleGap: 16.0,
+                          leading: Icon(Icons.info,
+                              color: Color.fromARGB(255, 1, 70, 126)),
+                          title: Text(
+                            'Squamous Cell Carcinoma',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 fontSize: 25,

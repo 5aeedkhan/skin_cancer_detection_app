@@ -24,7 +24,7 @@ class Splash2 extends StatelessWidget {
         photoSize: 200.0,
         loadingText: Text(
           "We care about your health",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.blueAccent),
         ),
         loaderColor: Color.fromARGB(255, 227, 245, 255),
       ),
