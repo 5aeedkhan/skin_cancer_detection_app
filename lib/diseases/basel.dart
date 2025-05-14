@@ -55,61 +55,41 @@ class _BaselState extends State<Basel> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text('augustus'),
         leading: IconButton(
-            onPressed: () {
-              if (diseases_or_test == 'diseases') {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Diseases()),
-                );
-              } else if (diseases_or_test == 'history') {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => History()),
-                );
-              } else {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Display_image()),
-                );
-              }
-            },
-            icon: Icon(Icons.arrow_back_outlined)),
-
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Diseases()));
+          },
+          icon: Icon(Icons.arrow_back_outlined),
+        ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Home()),
-                );
-              },
-              icon: Icon(Icons.home_sharp)),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+            },
+            icon: Icon(Icons.home_sharp),
+          ),
         ],
-        flexibleSpace: Expanded(
-          child: Container(
-            padding: EdgeInsets.only(top: 35),
-            child: Text(
-              'Basal Cell Carcinoma',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+        flexibleSpace: Container(
+          padding: EdgeInsets.only(top: 35),
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Color.fromARGB(255, 16, 170, 226),
+                Color.fromARGB(255, 87, 179, 212),
+              ],
             ),
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color.fromARGB(255, 16, 170, 226),
-                    Color.fromARGB(255, 87, 179, 212),
-                  ]),
+          ),
+          child: Text(
+            'Basal Cell Carcinoma',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

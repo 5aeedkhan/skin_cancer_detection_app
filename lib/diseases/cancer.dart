@@ -63,25 +63,25 @@ class _CancerState extends State<Cancer> {
               },
               icon: Icon(Icons.home_sharp)),
         ],
-        flexibleSpace: Expanded(
-          child: Container(
-            padding: EdgeInsets.only(top: 35),
-            child: Text(
-              'What is skin cancer',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+        flexibleSpace: Container(
+          padding: EdgeInsets.only(top: 35),
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Color.fromARGB(255, 16, 170, 226),
+                Color.fromARGB(255, 87, 179, 212),
+              ],
             ),
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color.fromARGB(255, 16, 170, 226),
-                    Color.fromARGB(255, 87, 179, 212),
-                  ]),
+          ),
+          child: Text(
+            'What is skin cancer',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
