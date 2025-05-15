@@ -5,6 +5,7 @@ import 'package:flutter_application_1/diseases/diseases.dart';
 import 'package:flutter_application_1/history/history.dart';
 import 'package:flutter_application_1/modules/login_screen/login_screen.dart';
 import 'package:flutter_application_1/skin_test/1-test_home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,6 +15,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future<void> _logout() async {
+    // Clear all preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    
+    // Navigate to login screen and clear the navigation stack
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+      (Route<dynamic> route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -26,18 +39,17 @@ class _HomeState extends State<Home> {
             content: Text('Do you want to close the app?'),
             actions: [
               TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pop(false), // Stay in app
+                onPressed: () => Navigator.of(context).pop(false),
                 child: Text('No'),
               ),
               TextButton(
-                onPressed: () => Navigator.of(context).pop(true), // Exit app
+                onPressed: () => Navigator.of(context).pop(true),
                 child: Text('Yes'),
               ),
             ],
           ),
         );
-        return shouldClose ?? false; // Return true to exit, false to stay
+        return shouldClose ?? false;
       },
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
@@ -303,11 +315,7 @@ class _HomeState extends State<Home> {
                   width: 330,
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
-                    },
+                    onPressed: _logout,
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       fixedSize: Size(330, 100),
