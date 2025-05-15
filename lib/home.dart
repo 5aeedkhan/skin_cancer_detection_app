@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
     // Clear all preferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
-    
+
     // Navigate to login screen and clear the navigation stack
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -107,9 +107,10 @@ class _HomeState extends State<Home> {
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => Test_Home_page()),
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Test_Home_page()),
+                        (route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -160,8 +161,10 @@ class _HomeState extends State<Home> {
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.pushAndRemoveUntil(
+                        context,
                         MaterialPageRoute(builder: (context) => Diseases()),
+                        (route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -212,8 +215,10 @@ class _HomeState extends State<Home> {
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.pushAndRemoveUntil(
+                        context,
                         MaterialPageRoute(builder: (context) => History()),
+                        (route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -264,8 +269,10 @@ class _HomeState extends State<Home> {
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.pushAndRemoveUntil(
+                        context,
                         MaterialPageRoute(builder: (context) => About()),
+                        (route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(
